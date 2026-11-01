@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naniber | Royalty & Weighbridge Management</title>
+
+<style>
+:root {
+  --green: #16834a;
+  --dark: #12452e;
+  --light: #eaf5ee;
+  --white: #ffffff;
+  --text: #25352c;
+  --muted: #718078;
+  --border: #dce8df;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f8f5;
+  color: var(--text);
+}
+
+header {
+  background: white;
+  padding: 17px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo h1 {
+  color: var(--green);
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+.logo p {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--green);
+}
+
+.login-btn {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 11px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hero {
+  background: linear-gradient(110deg, #103e29, #21854d);
+  color: white;
+  padding: 65px 7%;
+}
+
+.hero small {
+  letter-spacing: 2px;
+  color: #d3ebda;
+}
+
+.hero h2 {
+  font-size: clamp(30px, 5vw, 46px);
+  max-width: 700px;
+  margin: 20px 0;
+}
+
+.hero p {
+  line-height: 1.8;
+  max-width: 650px;
+  color: #e4f1e7;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 45px 5%;
+}
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.section-heading h2 {
+  color: var(--dark);
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: white;
+  padding: 23px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.03);
+}
+
+.card .icon {
+  font-size: 27px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  color: var(--dark);
+  margin-bottom: 9px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.card strong {
+  display: block;
+  font-size: 25px;
+  color: var(--green);
+  margin-top: 12px;
+}
+
+.panel {
+  background: white;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  margin-bottom: 28px;
+}
+
+.panel h2 {
+  color: var(--dark);
+  margin-bottom: 22px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 14px;
+  background: white;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.btn {
+  background: var(--green);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn:hover, .login-btn:hover {
+  background: var(--dark);
+}
+
+.result {
+  background: var(--light);
+  padding: 18px;
+  border-radius: 7px;
+  margin-top: 20px;
+  line-height: 2;
+  display: none;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+th, td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  font-size: 13px;
+}
+
+th {
+  background: var(--light);
+  color: var(--dark);
+}
+
+.status {
+  color: var(--green);
+  font-weight: bold;
+}
+
+footer {
+  background: var(--dark);
+  color: white;
+  padding: 30px 6%;
+  text-align: center;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.notice {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+
+@media(max-width: 750px) {
+  header {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  nav {
+    width: 100%;
+    overflow-x: auto;
+    padding: 8px 0;
+  }
+
+  nav a {
+    white-space: nowrap;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .hero {
+    padding: 45px 6%;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printSlip, #printSlip * {
+    visibility: visible;
+  }
+
+  #printSlip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <h1>NANIBER</h1>
+    <p>LIMESTONE MINES · KUTCH, GUJARAT</p>
+  </div>
+
+  <nav>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#weighbridge">Weighbridge</a>
+    <a href="#royalty">Royalty</a>
+    <a href="#records">Records</a>
+    <button class="login-btn" onclick="showLogin()">Admin Login</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <small>MINING OPERATIONS MANAGEMENT</small>
+  <h2>Royalty & Weighbridge Management System</h2>
+  <p>
+    A centralised platform for vehicle weighment, mineral dispatch,
+    royalty calculations, contractor deductions and operational records
+    at Naniber Limestone Mines.
+  </p>
+</section>
+
+<main class="container" id="dashboard">
+
+  <div class="section-heading">
+    <h2>Operations Dashboard</h2>
+    <p>Overview of the mining management system.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🚛</div>
+      <h3>Vehicle Entries</h3>
+      <p>Total weighment records in this browser session</p>
+      <strong id="vehicleCount">0</strong>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚖️</div>
+      <h3>Mineral Quantity</h3>
+      <p>Total recorded net quantity</p>
+      <strong id="quantityCount">0 MT</strong>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧾</div>
+      <h3>Royalty Calculator</h3>
+      <p>Calculate estimated royalty on mineral quantity</p>
+      <strong>Calculate</strong>
+    </div>
+
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Reports</h3>
+      <p>View recorded entries and operational information</p>
+      <strong>Records</strong>
+    </div>
+  </div>
+
+  <section class="panel" id="weighbridge">
+    <h2>Weighbridge Vehicle Entry</h2>
+
+    <form id="weightForm">
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Vehicle Registration Number</label>
+          <input id="vehicle" placeholder="e.g. GJ 12 AB 1234" required>
+        </div>
+
+        <div class="field">
+          <label>Material</label>
+          <select id="material">
+            <option>Limestone</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Gross Weight (kg)</label>
+          <input type="number" id="gross" min="0" step="0.01" required>
+        </div>
+
+        <div class="field">
+          <label>Tare Weight (kg)</label>
+          <input type="number" id="tare" min="0" step="0.01" required>
+        </div>
+
+        <div class="field">
+          <label>Contractor / Transporter</label>
+          <input id="contractor" placeholder="Enter contractor name">
+        </div>
+
+        <div class="field">
+          <label>Weighment Date</label>
+          <input type="date" id="date" required>
+        </div>
+
+        <div class="field full">
+          <label>Remarks</label>
+          <input id="remarks" placeholder="Optional remarks">
+        </div>
+
+        <div class="field full">
+          <button class="btn" type="submit">Calculate & Generate Weighment Slip</button>
+        </div>
+
+      </div>
+    </form>
+
+    <div class="result" id="weightResult"></div>
+
+    <div id="printSlip" style="display:none;"></div>
+
+    <p class="notice">
+      Vehicle number recognition through the existing mine cameras
+      is a planned feature. This first version uses manual entry.
+    </p>
+  </section>
+
+  <section class="panel" id="royalty">
+    <h2>Royalty Calculator</h2>
+
+    <div class="form-grid">
+      <div class="field">
+        <label>Limestone Quantity (MT)</label>
+        <input type="number" id="royaltyQuantity" min="0" placeholder="Enter quantity">
+      </div>
+
+      <div class="field">
+        <label>Royalty Rate (₹ per MT)</label>
+        <input type="number" id="royaltyRate" min="0" step="0.01" placeholder="Enter verified rate">
+      </div>
+
+      <div class="field full">
+        <button class="btn" onclick="calculateRoyalty()">Calculate Royalty</button>
+      </div>
+    </div>
+
+    <div class="result" id="royaltyResult"></div>
+
+    <p class="notice">
+      The royalty rate must be verified against the applicable government
+      schedule and the mine's lease conditions. This calculator does not
+      yet include DMF, NMET, dead rent or other statutory charges.
+      No official rate has been pre-filled.
+    </p>
+  </section>
+
+  <section class="panel" id="records">
+    <h2>Recent Weighment Records</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Vehicle</th>
+            <th>Contractor</th>
+            <th>Gross (kg)</th>
+            <th>Tare (kg)</th>
+            <th>Net (MT)</th>
+            <th>Slip</th>
+          </tr>
+        </thead>
+        <tbody id="recordsList">
+          <tr>
+            <td colspan="7">No weighment records entered yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <h3>NANIBER LIMESTONE MINES</h3>
+  <p>Kutch, Gujarat, India</p>
+  <p>Royalty & Weighbridge Management System</p>
+  <p>© 2026 Naniber Limestone Mines</p>
+</footer>
+
+<script>
+let records = [];
+let slipNumber = 0;
+
+document.getElementById("date").value =
+  new Date().toISOString().slice(0, 10);
+
+document.getElementById("weightForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const vehicle = document.getElementById("vehicle").value.trim();
+  const gross = Number(document.getElementById("gross").value);
+  const tare = Number(document.getElementById("tare").value);
+  const contractor = document.getElementById("contractor").value.trim();
+  const date = document.getElementById("date").value;
+  const material = document.getElementById("material").value;
+  const remarks = document.getElementById("remarks").value.trim();
+
+  if (!vehicle || !date || gross <= 0 || tare < 0 || gross < tare) {
+    alert("Please check the vehicle details and weights.");
+    return;
+  }
+
+  const netKg = gross - tare;
+  const netMT = netKg / 1000;
+
+  slipNumber++;
+
+  const record = {
+    slip: slipNumber,
+    vehicle,
+    gross,
+    tare,
+    netMT,
+    contractor,
+    date,
+    material,
+    remarks
+  };
+
+  records.push(record);
+
+  document.getElementById("weightResult").style.display = "block";
+  document.getElementById("weightResult").innerHTML =
+    "<strong>Net Weight: " + netKg.toLocaleString() +
+    " kg (" + netMT.toFixed(3) + " MT)</strong><br>" +
+    "Weighment Slip: " + slipNumber +
+    '<br><button class="btn" onclick="printLatest()">Print Weighment Slip</button>';
+
+  updateRecords();
+
+  document.getElementById("weightForm").reset();
+  document.getElementById("date").value = date;
+});
+
+function updateRecords() {
+  const tbody = document.getElementById("recordsList");
+
+  tbody.replaceChildren();
+
+  records.forEach((r, index) => {
+    const tr = document.createElement("tr");
+
+    [
+      r.date,
+      r.vehicle,
+      r.contractor || "-",
+      r.gross.toLocaleString(),
+      r.tare.toLocaleString(),
+      r.netMT.toFixed(3)
+    ].forEach(value => {
+      const td = document.createElement("td");
+      td.textContent = value;
+      tr.appendChild(td);
+    });
+
+    const td = document.createElement("td");
+    const btn = document.createElement("button");
+    btn.textContent = "Print";
+    btn.className = "btn";
+    btn.onclick = () => printSlip(index);
+    td.appendChild(btn);
+    tr.appendChild(td);
+
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById("vehicleCount").textContent = records.length;
+
+  const total = records.reduce((sum, r) => sum + r.netMT, 0);
+
+  document.getElementById("quantityCount").textContent =
+    total.toFixed(3) + " MT";
+}
+
+function printLatest() {
+  printSlip(records.length - 1);
+}
+
+function printSlip(index) {
+  const r = records[index];
+  if (!r) return;
+
+  const slip = document.getElementById("printSlip");
+
+  slip.innerHTML = `
+    <div style="font-family:Arial; max-width:700px; margin:auto; color:#222;">
+      <h2 style="text-align:center;color:#16834a;">NANIBER LIMESTONE MINES</h2>
+      <p style="text-align:center;">Kutch, Gujarat</p>
+      <hr style="margin:20px 0;">
+      <h3 style="text-align:center;">WEIGHMENT SLIP</h3>
+      <p><b>Slip Number:</b> ${r.slip}</p>
+      <p><b>Date:</b> ${r.date}</p>
+      <p><b>Vehicle Number:</b> ${escapeText(r.vehicle)}</p>
+      <p><b>Contractor:</b> ${escapeText(r.contractor || "-")}</p>
+      <p><b>Material:</b> ${escapeText(r.material)}</p>
+      <hr>
+      <h3>Weight Details</h3>
+      <p><b>Gross Weight:</b> ${r.gross.toLocaleString()} kg</p>
+      <p><b>Tare Weight:</b> ${r.tare.toLocaleString()} kg</p>
+      <p><b>Net Weight:</b> ${(r.netMT * 1000).toLocaleString()} kg</p>
+      <h2>Net Quantity: ${r.netMT.toFixed(3)} MT</h2>
+      <p><b>Remarks:</b> ${escapeText(r.remarks || "-")}</p>
+      <br><br>
+      <p>Weighbridge Operator Signature: __________________</p>
+      <p>Driver Signature: __________________</p>
+      <hr>
+      <p style="text-align:center;font-size:12px;">Computer-generated demonstration slip.</p>
+    </div>
+  `;
+
+  slip.style.display = "block";
+  window.print();
+  slip.style.display = "none";
+}
+
+function escapeText(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function calculateRoyalty() {
+  const quantity = Number(document.getElementById("royaltyQuantity").value);
+  const rate = Number(document.getElementById("royaltyRate").value);
+
+  if (!Number.isFinite(quantity) || !Number.isFinite(rate) ||
+      quantity <= 0 || rate <= 0) {
+    alert("Enter a valid quantity and verified royalty rate.");
+    return;
+  }
+
+  const royalty = quantity * rate;
+
+  const result = document.getElementById("royaltyResult");
+  result.style.display = "block";
+  result.textContent =
+    "Estimated basic royalty: ₹" +
+    royalty.toLocaleString("en-IN", {maximumFractionDigits: 2});
+}
+
+function showLogin() {
+  alert("Login and role-based access will be connected in the next development stage.");
+}
+</script>
+
+</body>
+</html>
